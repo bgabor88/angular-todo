@@ -8,6 +8,7 @@ import { Todo } from 'src/app/models/Todo';
 })
 export class TodosComponent implements OnInit {
   todos: Todo[] = [];
+  inputTodo: string = '';
 
   constructor() {}
 
@@ -24,14 +25,23 @@ export class TodosComponent implements OnInit {
     ];
   }
 
-  toggleDone(id:number):void {
+  toggleDone(id: number): void {
     this.todos.map((v, i) => {
       if (i === id) v.completed = !v.completed;
       return v;
-    })
+    });
   }
 
-  deleteTodo(id:number):void {
+  deleteTodo(id: number): void {
     this.todos = this.todos.filter((v, i) => i !== id);
+  }
+
+  addTodo(): void {
+    this.todos.push({
+      content: this.inputTodo,
+      completed: false,
+    });
+
+    this.inputTodo = "";
   }
 }
